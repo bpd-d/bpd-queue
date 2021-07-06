@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"sourceMap": true,
+		"module": "esnext",
+		"target": "esnext",
+		"jsx": "preserve",
+		"allowJs": true,
+		"experimentalDecorators": true,
+		"declaration": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"]
+}
