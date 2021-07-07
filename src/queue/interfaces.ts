@@ -18,8 +18,23 @@ export interface IQueueTaskOptions {
 }
 
 export interface IQueueTaskBuilder<T> {
+    /**
+     * Creates a promise that is resolved after task has been executed
+     * Method pushes task to hanlder queue
+     */
     async(): Promise<T>;
+    /**
+     * Creates a task in a sync way.
+     * Adds task to queue
+     * @param onResolve callback invoked with main callback result
+     * @param onError callback invoked with error if occured
+     */
     then(onResolve: IQueueResolveCallback<T>, onError: IQueueErrorCallback): void;
+    /**
+     * Sets task options
+     * Object provided as an argument is merged with existing options 
+     * @param options options object
+     */
     with(options: IQueueTaskOptions): IQueueTaskBuilder<T>;
 }
 
@@ -34,6 +49,10 @@ export interface IQueueTask<T> {
 }
 
 export interface IQueueHandler<T> {
+    /**
+     * Pushes task to queue
+     * @param task instane
+     */
     push(task: IQueueTask<T>): void;
 }
 

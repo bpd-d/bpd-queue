@@ -3,6 +3,14 @@ import { IQueueCallback, IQueueErrorCallback, IQueueHandler, IQueueResolveCallba
 
 const idGenerator = generator();
 
+/**
+ * Facade method that creates a task object
+ * @param callback task callback
+ * @param onResolve resolve callback
+ * @param onError error callback
+ * @param options task options
+ * @returns instance of task object
+ */
 function createTask<T>(callback: IQueueCallback<T>, onResolve: IQueueResolveCallback<T>, onError: IQueueErrorCallback | undefined,  options?: IQueueTaskOptions): IQueueTask<T> {
     return {
         callback,
@@ -15,6 +23,12 @@ function createTask<T>(callback: IQueueCallback<T>, onResolve: IQueueResolveCall
     }
 }
 
+/**
+ * Method that creates a task builder object
+ * @param handler task hanlder instance
+ * @param callback task execution callback
+ * @returns instance of task builder
+ */
 export default function TaskBuilder<T>(handler: IQueueHandler<T>, callback:IQueueCallback<T>): IQueueTaskBuilder<T> {
     let _options: IQueueTaskOptions = {};
     const builder: IQueueTaskBuilder<T> = {
