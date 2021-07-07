@@ -2,9 +2,22 @@
 	"name": "bpd-queue",
 	"version": "1.0.0",
 	"description": "Simple queue implementation which can be used everywhere function must be executed in a specific order",
-	"main": "index.js",
+	"main": "./dist/esm/index.js",
+	"type": "module",
+	"files": [
+		"/dist/*"
+	],
+	"exports": {
+		"import": "./dist/esm/index.js",
+		"require": "./dist/main.cjs"
+	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "webpack --config webpack.prod.cjs",
+		"build:minify": "webpack --config webpack.minify.cjs",
+		"build:esm": "tsc -p tsconfig.esm.json",
+		"test": "karma start karma.conf.cjs",
+		"prod": "npm run build && npm run build:esm && npm run build:minify",
+		"dev": "webpack serve --config webpack.dev.cjs"
 	},
 	"repository": {
 		"type": "git",
@@ -18,6 +31,7 @@
 	},
 	"homepage": "https://github.com/bpd-d/bpd-queue#readme",
 	"devDependencies": {
+		"@types/jasmine": "^3.7.8",
 		"clean-webpack-plugin": "^4.0.0-alpha.0",
 		"html-webpack-plugin": "^5.3.2",
 		"jasmine-core": "^3.8.0",
@@ -33,7 +47,6 @@
 		"webpack-merge": "^5.8.0"
 	},
 	"dependencies": {
-		"@types/jasmine": "^3.7.7",
 		"fork-ts-checker-webpack-plugin": "^6.2.12",
 		"karma-typescript": "^5.5.1",
 		"ts-loader": "^9.2.3",

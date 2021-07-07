@@ -1,4 +1,5 @@
-const merge = require("webpack-merge");
+"use strict"
+const {merge} = require("webpack-merge");
 const common = require("./webpack.config.cjs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 

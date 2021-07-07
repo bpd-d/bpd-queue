@@ -1,7 +1,10 @@
+"use strict"
 var path = require("path");
-const merge = require("webpack-merge");
+const {merge} = require("webpack-merge");
 const common = require("./webpack.config.cjs");
 const TerserPlugin = require("terser-webpack-plugin");
+const libName = "bpdQueue";
+
 module.exports = merge(common, {
 	mode: "production",
 	devtool: "source-map",
@@ -18,7 +21,7 @@ module.exports = merge(common, {
 		filename: "[name].min.js",
 		path: path.resolve(__dirname, "dist"),
 		libraryTarget: "umd",
-		library: ["bpdDom", "[name]"],
+		library: libName,
 		umdNamedDefine: true,
 	},
 });

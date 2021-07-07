@@ -1,6 +1,6 @@
 "use strict";
 //import HtmlWebpackPlugin from "html-webpack-plugin";
-
+const libName = 'bpdQueue';
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 var path = require("path");
@@ -29,15 +29,14 @@ module.exports = {
 		noInfo: false,
 	},
 	entry: {
-		dom: "./index.ts",
-		toolkit: "./toolkit.ts",
+		queue: "./index.ts",
 	},
 	output: {
 		filename: "[name].cjs",
 		path: path.resolve(__dirname, "dist"),
 		libraryTarget: "umd",
 		globalObject: "this",
-		library: ["bpdDom", "[name]"],
+		library: libName,
 		umdNamedDefine: true,
 	},
 	plugins: [new HtmlWebpackPlugin()],
