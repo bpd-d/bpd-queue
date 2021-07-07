@@ -97,4 +97,14 @@ describe("Tests checking EventHandler for Queue", () => {
         expect(stats.emittedTotal).toEqual(2);
     })
     
+    it("Refuses to attach a callback if event is not on supported list", () => {
+        const handler = new EventHandler<string, string>({
+            supportedEvents: []
+        });
+
+        const id = handler.on(testEventName, ErrorCallback);
+        
+        expect(id).toBeNull();
+    })
+
 })

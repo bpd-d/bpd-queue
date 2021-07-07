@@ -69,3 +69,7 @@ export interface IEventHandler<T,V> {
 	 */
 	status(): IEventHandlerStatus;
 }
+
+export interface IEventHandlerOptions {
+	supportedEvents?: string[];
+}

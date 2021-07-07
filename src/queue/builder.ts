@@ -10,7 +10,7 @@ function createTask<T>(callback: IQueueCallback<T>, onResolve: IQueueResolveCall
         onError,
         id: idGenerator.next().value,
         attempt: 0,
-        async: options?.async,
+        async: options?.async === true,
         retryNum: options?.retryNum ?? 0
     }
 }
@@ -20,6 +20,7 @@ export default function TaskBuilder<T>(handler: IQueueHandler<T>, callback:IQueu
     const builder: IQueueTaskBuilder<T> = {
         with: (options: IQueueTaskOptions) => {
             _options = {
+                ..._options,
                 ...options
             }
             return builder;

@@ -1,3 +1,5 @@
+import { OnEventCallback } from "../events/interfaces";
+
 export interface IQueueCallback<T> {
     (resolve: IQueueResolveCallback<T>, reject: IQueueErrorCallback): void | Promise<void>;
 } 
@@ -36,7 +38,19 @@ export interface IQueueHandler<T> {
 }
 
 export interface IQueue<T> {
+    /**
+     * Dispatches an callback to a queue
+     * @param callback callback to be executed on queue
+     * @returns task builder
+     */
     dispatch(callback: IQueueCallback<T>): IQueueTaskBuilder<T>;
+    /**
+     * 
+     * @param eventName 
+     * @param callback 
+     */
+    on(eventName: string, callback:OnEventCallback<EventData, void>): string;
+    detach(eventName: string, id: string): void;
 }
 
 export interface EventData {

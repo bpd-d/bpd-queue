@@ -1,5 +1,5 @@
 import { generator } from "../tools";
-import { EventsObj, IEventHandler, IEventHandlerStatus, IQueueEvent, IStatusManage, OnEventCallback } from "./interfaces";
+import { EventsObj, IEventHandler, IEventHandlerOptions, IEventHandlerStatus, IQueueEvent, IStatusManage, OnEventCallback } from "./interfaces";
 
 const idGenerator = generator();
 
@@ -37,13 +37,22 @@ function EventStatusHandler(): IStatusManage {
 export default class EventHandler<T,V> implements IEventHandler<T,V> {
     private _events: EventsObj<T, V>;
     private _statusManage: IStatusManage;
-	constructor() {
+    private _options: IEventHandlerOptions;
+
+	constructor(options?: IEventHandlerOptions) {
         this._events = {};
         this._statusManage = EventStatusHandler();
+        this._options = {
+            ...options
+        }
     }
 
     on(eventName: string, callback: OnEventCallback<T, V>): string {
-       if(!this._events[eventName]) {
+        if(this._options?.supportedEvents && !this._options.supportedEvents.includes(eventName)) {
+            return null;
+        }
+       
+        if(!this._events[eventName]) {
            this._events[eventName] = [];
        }
 
