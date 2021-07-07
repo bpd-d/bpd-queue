@@ -57,7 +57,7 @@ export interface IEventHandler<T,V> {
 	 * @param data - event data
 	 * @returns list of result returned by callbacks
 	 */
-	emit(eventName: string, data: T): Promise<V[]>;
+	emit(eventName: string, data?: T): Promise<V[]>;
 	/**
 	 * Checks whether event handler contains event
 	 * @param {String} eventName - event name 
